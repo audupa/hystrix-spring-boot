@@ -1,12 +1,14 @@
 package com.intuit.springboot.api;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 public interface HystrixApi {
 
-    String remoteCall(String request) throws RemoteException;
+    List<String> doTest() throws RemoteException;
 
-    String fallbackRemoteCall(String request);
+    List<String> getData() throws RemoteException;
 
+    List<String> getDataFallBack();
 
 }

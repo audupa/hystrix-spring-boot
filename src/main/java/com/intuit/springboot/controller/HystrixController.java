@@ -1,15 +1,12 @@
 package com.intuit.springboot.controller;
 
 import com.intuit.springboot.api.HystrixApi;
-import com.intuit.springboot.entity.Student;
-import com.intuit.springboot.service.HystrixService;
-import com.intuit.springboot.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.rmi.RemoteException;
-import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/hystrix")
@@ -18,8 +15,16 @@ public class HystrixController {
     @Autowired
     private HystrixApi hystrixApi;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String callRemoteService() throws RemoteException {
-        return hystrixApi.remoteCall("Test");
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @RequestMapping(value = "/test")
+    public List<String> doTest() throws RemoteException {
+        return hystrixApi.doTest();
+    }
+
+    @RequestMapping(value = "/getData")
+    public List<String> getData() throws RemoteException {
+        return hystrixApi.getData();
     }
 }
