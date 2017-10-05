@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 @Service
 public class HystrixServiceImpl implements HystrixApi{
@@ -29,13 +30,13 @@ public class HystrixServiceImpl implements HystrixApi{
 
     }*/
 
-    @HystrixCommand(fallbackMethod = "getDataFallBack", groupKey = "TestCommandGroup", commandKey = "testCommandKey")
+    @HystrixCommand(fallbackMethod = "getDataFallBack", groupKey = "TestCommandGroup", commandKey = "testCommandKey1")
     public List<String> doTest(){
         return restTemplate.getForObject("http://localhost:8080/hystrix/getData", List.class);
 
     }
 
-    @HystrixCommand(groupKey = "TestCommandGroup", commandKey = "abcCommandKey")
+    @HystrixCommand(fallbackMethod = "getDataFallBack", groupKey = "TestCommandGroup", commandKey = "testCommandKey2")
     public List<String> getData() throws RemoteException {
         try {
             Thread.sleep(2000);
