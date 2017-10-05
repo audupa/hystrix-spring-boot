@@ -27,6 +27,7 @@ public class HystrixServiceTest {
     public void test() {
 
 
+
     }
 
 }
