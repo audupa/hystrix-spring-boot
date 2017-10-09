@@ -9,6 +9,6 @@ public interface HystrixApi {
 
     List<String> getData() throws RemoteException;
 
-    List<String> getDataFallBack();
+    List<String> getFallBackData();
 
 }

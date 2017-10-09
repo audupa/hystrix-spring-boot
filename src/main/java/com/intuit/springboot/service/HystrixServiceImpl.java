@@ -30,13 +30,13 @@ public class HystrixServiceImpl implements HystrixApi{
 
     }*/
 
-    @HystrixCommand(fallbackMethod = "getDataFallBack", groupKey = "TestCommandGroup", commandKey = "testCommandKey1")
+    @HystrixCommand(fallbackMethod = "getFallBackData", commandKey = "serviceACommandKey")
     public List<String> doTest(){
         return restTemplate.getForObject("http://localhost:8080/hystrix/getData", List.class);
 
     }
 
-    @HystrixCommand(fallbackMethod = "getDataFallBack", groupKey = "TestCommandGroup", commandKey = "testCommandKey2")
+    @HystrixCommand(fallbackMethod = "getFallBackData", commandKey = "serviceBCommandKey")
     public List<String> getData() throws RemoteException {
         try {
             Thread.sleep(2000);
@@ -50,7 +50,7 @@ public class HystrixServiceImpl implements HystrixApi{
         return list;
     }
 
-    public List<String> getDataFallBack()  {
+    public List<String> getFallBackData()  {
             List<String> list = new ArrayList<String>();
             list.add("FallBack Data 1");
             list.add("FallBack Data 2");
